@@ -37,12 +37,13 @@ function toggleForms() {
 function signUp() {
     const firstName = document.getElementById('first-name').value;
     const lastName = document.getElementById('last-name').value;
+    const username = document.getElementById('username').value;
     const email = document.getElementById('email').value;
     const mobile = document.getElementById('mobile').value;
     const password = document.getElementById('signup-password').value;
     const signupError = document.getElementById('signup-error');
 
-    if (firstName && lastName && email && mobile && password) {
+    if (firstName && lastName && username && email && mobile && password) {
         if (!validateEmail(email)) {
             signupError.innerText = 'Invalid email format!';
             return;
@@ -52,14 +53,15 @@ function signUp() {
             return;
         }
 
-        const userExists = users.find(user => user.email === email || user.mobile === mobile);
+        const userExists = users.find(user => user.username === username || user.email === email || user.mobile === mobile);
 
         if (userExists) {
-            signupError.innerText = 'User with this email or mobile number already exists!';
+            signupError.innerText = 'Username, email, or mobile number already in use!';
         } else {
             const newUser = {
                 firstName,
                 lastName,
+                username,
                 email,
                 mobile,
                 password: hashPassword(password),
@@ -143,12 +145,12 @@ function hideSendMoney() {
 
 // Send Money Functionality
 function sendMoney() {
-    const recipientEmail = document.getElementById('recipient-email').value;
+    const recipientUsername = document.getElementById('recipient-username').value;
     const amount = parseFloat(document.getElementById('send-amount').value);
     const sendError = document.getElementById('send-error');
 
-    if (!validateEmail(recipientEmail)) {
-        sendError.innerText = 'Invalid recipient email format!';
+    if (!recipientUsername) {
+        sendError.innerText = 'Please enter a recipient username!';
         return;
     }
 
@@ -162,7 +164,7 @@ function sendMoney() {
         return;
     }
 
-    const recipient = users.find(user => user.email === recipientEmail);
+    const recipient = users.find(user => user.username === recipientUsername);
 
     if (!recipient) {
         sendError.innerText = 'Recipient not found!';
@@ -179,8 +181,8 @@ function sendMoney() {
     recipient.balance += amount;
 
     // Update transaction history
-    currentUser.transactions.push({ type: `Sent to ${recipientEmail}`, amount: amount });
-    recipient.transactions.push({ type: `Received from ${currentUser.email}`, amount: amount });
+    currentUser.transactions.push({ type: `Sent to ${recipientUsername}`, amount: amount });
+    recipient.transactions.push({ type: `Received from ${currentUser.username}`, amount: amount });
 
     displayTransactionHistory();
     document.getElementById('balance').innerText = currentUser.balance.toFixed(2);
@@ -206,6 +208,7 @@ function showProfileUpdate() {
 
     document.getElementById('update-first-name').value = currentUser.firstName;
     document.getElementById('update-last-name').value = currentUser.lastName;
+    document.getElementById('update-username').value = currentUser.username;
     document.getElementById('update-email').value = currentUser.email;
     document.getElementById('update-mobile').value = currentUser.mobile;
 }
@@ -219,24 +222,26 @@ function hideProfileUpdate() {
 function updateProfile() {
     const firstName = document.getElementById('update-first-name').value;
     const lastName = document.getElementById('update-last-name').value;
+    const username = document.getElementById('update-username').value;
     const email = document.getElementById('update-email').value;
     const mobile = document.getElementById('update-mobile').value;
     const updateError = document.getElementById('update-error');
 
-    if (firstName && lastName && email && mobile) {
+    if (firstName && lastName && username && email && mobile) {
         if (!validateEmail(email)) {
             updateError.innerText = 'Invalid email format!';
             return;
         }
 
-        // Check if the email or mobile number is already in use by another user
-        const userExists = users.find(user => (user.email === email || user.mobile === mobile) && user !== currentUser);
+        // Check if the username, email, or mobile number is already in use by another user
+        const userExists = users.find(user => (user.username === username || user.email === email || user.mobile === mobile) && user !== currentUser);
 
         if (userExists) {
-            updateError.innerText = 'Email or mobile number already in use!';
+            updateError.innerText = 'Username, email, or mobile number already in use!';
         } else {
             currentUser.firstName = firstName;
             currentUser.lastName = lastName;
+            currentUser.username = username;
             currentUser.email = email;
             currentUser.mobile = mobile;
 

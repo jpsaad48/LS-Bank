@@ -5,23 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LS Bank</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
 </head>
 <body>
     <div class="container">
-        <h1>Welcome to LS Bank</h1>
+        <header class="header">
+            <h1>LS Bank</h1>
+        </header>
+
+        <nav class="nav">
+            <a href="#" class="nav-link" onclick="toggleForms()">Sign Up</a>
+            <a href="#" class="nav-link" onclick="toggleForms()">Login</a>
+        </nav>
 
         <!-- Sign Up Form -->
         <div id="signup-form">
             <h2>Sign Up</h2>
             <input type="text" id="first-name" placeholder="First Name" required>
             <input type="text" id="last-name" placeholder="Last Name" required>
+            <input type="text" id="username" placeholder="Username" required>
             <input type="email" id="email" placeholder="Email" required>
             <input type="text" id="mobile" placeholder="Mobile Number" required>
             <input type="password" id="signup-password" placeholder="Password" required>
             <p class="note">Password must be at least 8 characters long, containing letters and numbers.</p>
             <button onclick="signUp()">Sign Up</button>
             <p id="signup-error"></p>
-            <p>Already have an account? <a href="#" onclick="toggleForms()">Login here</a></p>
         </div>
 
         <!-- Login Form -->
@@ -31,13 +39,16 @@
             <input type="password" id="login-password" placeholder="Password" required>
             <button onclick="login()">Login</button>
             <p id="login-error"></p>
-            <p>Don't have an account? <a href="#" onclick="toggleForms()">Sign Up here</a></p>
         </div>
 
         <!-- Dashboard -->
         <div id="dashboard" style="display: none;">
             <h2 id="welcome-message"></h2>
-            <p>Your balance: <span id="balance"></span> Taka</p>
+            <div class="balance-section">
+                <p>Your balance:</p>
+                <p id="balance" class="balance"></p>
+                <p>Taka</p>
+            </div>
             <input type="number" id="amount" placeholder="Enter amount" min="1">
             <button onclick="deposit()">Deposit</button>
             <button onclick="withdraw()">Withdraw</button>
@@ -56,7 +67,7 @@
         <!-- Send Money Form -->
         <div id="send-money-form" style="display: none;">
             <h2>Send Money</h2>
-            <input type="email" id="recipient-email" placeholder="Recipient Email" required>
+            <input type="text" id="recipient-username" placeholder="Recipient Username" required>
             <input type="number" id="send-amount" placeholder="Enter amount" min="1" required>
             <button onclick="sendMoney()">Send</button>
             <p id="send-error"></p>
@@ -68,6 +79,7 @@
             <h2>Update Profile</h2>
             <input type="text" id="update-first-name" placeholder="First Name" required>
             <input type="text" id="update-last-name" placeholder="Last Name" required>
+            <input type="text" id="update-username" placeholder="Username" required>
             <input type="email" id="update-email" placeholder="Email" required>
             <input type="text" id="update-mobile" placeholder="Mobile Number" required>
             <button onclick="updateProfile()">Update</button>

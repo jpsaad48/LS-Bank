@@ -1,5 +1,6 @@
+/* Global Styles */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Roboto', sans-serif;
     background-color: #f4f4f4;
     color: #333;
     display: flex;
@@ -7,31 +8,52 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 .container {
     background-color: #fff;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 300px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
     text-align: center;
 }
 
-h1 {
+.header h1 {
     color: #007bff;
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+
+.nav {
+    margin-bottom: 20px;
+}
+
+.nav-link {
+    color: white;
+    font-weight: 500;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: #007bff;
+    text-decoration: none;
+    margin: 0 10px;
+    cursor: pointer;
 }
 
 input {
-    width: 90%;
-    padding: 10px;
+    width: 100%;
+    padding: 12px;
     margin: 10px 0;
     border: 1px solid #ccc;
     border-radius: 5px;
+    box-sizing: border-box;
 }
 
 button {
-    padding: 10px;
+    padding: 12px;
     width: 100%;
     background-color: #007bff;
     color: #fff;
@@ -39,20 +61,45 @@ button {
     border-radius: 5px;
     cursor: pointer;
     margin-top: 10px;
+    font-weight: 500;
 }
 
 button:hover {
     background-color: #0056b3;
 }
 
-#login-error, #signup-error, #transaction-error, #update-error, #password-reset-error, #send-error {
+#signup-error, #login-error, #transaction-error, #send-error, #update-error, #password-reset-error {
     color: red;
     font-size: 14px;
+    margin-top: 10px;
 }
 
-#balance {
-    font-weight: bold;
-    font-size: 1.2em;
+.balance-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.balance {
+    font-size: 1.5em;
+    font-weight: 700;
+    color: #28a745;
+    margin: 0 5px;
+}
+
+ul {
+    text-align: left;
+    padding: 0;
+    margin: 10px 0;
+}
+
+li {
+    list-style-type: none;
+    margin: 5px 0;
+    padding: 10px;
+    background: #f4f4f4;
+    border-radius: 5px;
 }
 
 .note {
@@ -60,19 +107,31 @@ button:hover {
     color: #666;
 }
 
-ul {
-    text-align: left;
-    padding: 0;
-}
-
-li {
-    list-style-type: none;
-    margin: 5px 0;
-}
-
+/* Responsive Styles */
 @media (max-width: 600px) {
     .container {
-        width: 90%;
         padding: 15px;
+        max-width: 100%;
+    }
+
+    .header h1 {
+        font-size: 1.8em;
+    }
+
+    input, button {
+        font-size: 16px;
+        padding: 10px;
+    }
+
+    .balance-section {
+        flex-direction: column;
+    }
+
+    .balance {
+        font-size: 1.2em;
+    }
+
+    li {
+        font-size: 14px;
     }
 }
