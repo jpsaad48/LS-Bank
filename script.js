@@ -1,4 +1,4 @@
-// In-memory storage for users
+// In-memory storage for users  understand
 const users = [];
 
 let currentUser = null;
