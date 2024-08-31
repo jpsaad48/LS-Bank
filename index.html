@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LS Bank</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to LS Bank</h1>
+
+        <!-- Sign Up Form -->
+        <div id="signup-form">
+            <h2>Sign Up</h2>
+            <input type="text" id="first-name" placeholder="First Name" required>
+            <input type="text" id="last-name" placeholder="Last Name" required>
+            <input type="email" id="email" placeholder="Email" required>
+            <input type="text" id="mobile" placeholder="Mobile Number" required>
+            <input type="password" id="signup-password" placeholder="Password" required>
+            <p class="note">Password must be at least 8 characters long, containing letters and numbers.</p>
+            <button onclick="signUp()">Sign Up</button>
+            <p id="signup-error"></p>
+            <p>Already have an account? <a href="#" onclick="toggleForms()">Login here</a></p>
+        </div>
+
+        <!-- Login Form -->
+        <div id="login-form" style="display: none;">
+            <h2>Login</h2>
+            <input type="email" id="login-email" placeholder="Email" required>
+            <input type="password" id="login-password" placeholder="Password" required>
+            <button onclick="login()">Login</button>
+            <p id="login-error"></p>
+            <p>Don't have an account? <a href="#" onclick="toggleForms()">Sign Up here</a></p>
+        </div>
+
+        <!-- Dashboard -->
+        <div id="dashboard" style="display: none;">
+            <h2 id="welcome-message"></h2>
+            <p>Your balance: <span id="balance"></span> Taka</p>
+            <input type="number" id="amount" placeholder="Enter amount" min="1">
+            <button onclick="deposit()">Deposit</button>
+            <button onclick="withdraw()">Withdraw</button>
+            <p id="transaction-error"></p>
+
+            <h3>Transaction History</h3>
+            <ul id="transaction-history"></ul>
+
+            <button onclick="showProfileUpdate()">Update Profile</button>
+            <button onclick="showPasswordReset()">Reset Password</button>
+            <button onclick="deleteProfile()">Delete Profile</button>
+            <button onclick="logout()">Logout</button>
+        </div>
+
+        <!-- Profile Update Form -->
+        <div id="profile-update-form" style="display: none;">
+            <h2>Update Profile</h2>
+            <input type="text" id="update-first-name" placeholder="First Name" required>
+            <input type="text" id="update-last-name" placeholder="Last Name" required>
+            <input type="email" id="update-email" placeholder="Email" required>
+            <input type="text" id="update-mobile" placeholder="Mobile Number" required>
+            <button onclick="updateProfile()">Update</button>
+            <p id="update-error"></p>
+            <button onclick="hideProfileUpdate()">Cancel</button>
+        </div>
+
+        <!-- Password Reset Form -->
+        <div id="password-reset-form" style="display: none;">
+            <h2>Reset Password</h2>
+            <input type="password" id="current-password" placeholder="Current Password" required>
+            <input type="password" id="new-password" placeholder="New Password" required>
+            <input type="password" id="confirm-password" placeholder="Confirm New Password" required>
+            <p class="note">Password must be at least 8 characters long, containing letters and numbers.</p>
+            <button onclick="resetPassword()">Reset Password</button>
+            <p id="password-reset-error"></p>
+            <button onclick="hidePasswordReset()">Cancel</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
