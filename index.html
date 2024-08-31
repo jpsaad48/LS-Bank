@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>LS Bank</h1>
+        <h1>Welcome to LS Bank</h1>
 
         <!-- Sign Up Form -->
         <div id="signup-form">
@@ -41,6 +41,7 @@
             <input type="number" id="amount" placeholder="Enter amount" min="1">
             <button onclick="deposit()">Deposit</button>
             <button onclick="withdraw()">Withdraw</button>
+            <button onclick="showSendMoney()">Send Money</button>
             <p id="transaction-error"></p>
 
             <h3>Transaction History</h3>
@@ -50,6 +51,16 @@
             <button onclick="showPasswordReset()">Reset Password</button>
             <button onclick="deleteProfile()">Delete Profile</button>
             <button onclick="logout()">Logout</button>
+        </div>
+
+        <!-- Send Money Form -->
+        <div id="send-money-form" style="display: none;">
+            <h2>Send Money</h2>
+            <input type="email" id="recipient-email" placeholder="Recipient Email" required>
+            <input type="number" id="send-amount" placeholder="Enter amount" min="1" required>
+            <button onclick="sendMoney()">Send</button>
+            <p id="send-error"></p>
+            <button onclick="hideSendMoney()">Cancel</button>
         </div>
 
         <!-- Profile Update Form -->

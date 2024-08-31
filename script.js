@@ -1,4 +1,4 @@
-// In-memory storage for users  understand
+// In-memory storage for users
 const users = [];
 
 let currentUser = null;
@@ -128,6 +128,65 @@ function withdraw() {
         displayTransactionHistory();
         transactionError.innerText = '';
     }
+}
+
+// Show and Hide Send Money Form
+function showSendMoney() {
+    document.getElementById('dashboard').style.display = 'none';
+    document.getElementById('send-money-form').style.display = 'block';
+}
+
+function hideSendMoney() {
+    document.getElementById('send-money-form').style.display = 'none';
+    document.getElementById('dashboard').style.display = 'block';
+}
+
+// Send Money Functionality
+function sendMoney() {
+    const recipientEmail = document.getElementById('recipient-email').value;
+    const amount = parseFloat(document.getElementById('send-amount').value);
+    const sendError = document.getElementById('send-error');
+
+    if (!validateEmail(recipientEmail)) {
+        sendError.innerText = 'Invalid recipient email format!';
+        return;
+    }
+
+    if (isNaN(amount) || amount <= 0) {
+        sendError.innerText = 'Please enter a valid amount!';
+        return;
+    }
+
+    if (amount > currentUser.balance) {
+        sendError.innerText = 'Insufficient funds!';
+        return;
+    }
+
+    const recipient = users.find(user => user.email === recipientEmail);
+
+    if (!recipient) {
+        sendError.innerText = 'Recipient not found!';
+        return;
+    }
+
+    if (recipient === currentUser) {
+        sendError.innerText = 'You cannot send money to yourself!';
+        return;
+    }
+
+    // Process the transaction
+    currentUser.balance -= amount;
+    recipient.balance += amount;
+
+    // Update transaction history
+    currentUser.transactions.push({ type: `Sent to ${recipientEmail}`, amount: amount });
+    recipient.transactions.push({ type: `Received from ${currentUser.email}`, amount: amount });
+
+    displayTransactionHistory();
+    document.getElementById('balance').innerText = currentUser.balance.toFixed(2);
+    sendError.innerText = '';
+    alert(`Successfully sent ${amount} Taka to ${recipient.firstName} ${recipient.lastName}.`);
+    hideSendMoney();
 }
 
 // Logout Functionality

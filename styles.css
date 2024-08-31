@@ -27,7 +27,7 @@ input {
     padding: 10px;
     margin: 10px 0;
     border: 1px solid #ccc;
-    border-radius: 4.9px;
+    border-radius: 5px;
 }
 
 button {
@@ -45,7 +45,7 @@ button:hover {
     background-color: #0056b3;
 }
 
-#login-error, #signup-error, #transaction-error, #update-error, #password-reset-error {
+#login-error, #signup-error, #transaction-error, #update-error, #password-reset-error, #send-error {
     color: red;
     font-size: 14px;
 }
